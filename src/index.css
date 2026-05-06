@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: #020617;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #9333ea);
+  border-radius: 999px;
+}
