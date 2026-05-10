@@ -314,7 +314,7 @@ export default function App() {
 
               {/* IMAGE */}
               <img
-                src={processedImage || "/mada.png"}
+                src={processedImage || `${import.meta.env.BASE_URL}mada.png`}
                 alt="profile"
                 className="
                   relative
