@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { removeBackground } from "@imgly/background-removal";
+import madaImg from '../public/mada.png'
 
 import { motion } from "framer-motion";
 import {
@@ -314,7 +315,7 @@ export default function App() {
 
               {/* IMAGE */}
               <img
-                src={processedImage || `${import.meta.env.BASE_URL}mada.png`}
+                src={processedImage || "/mada.png"}
                 alt="profile"
                 className="
                   relative
