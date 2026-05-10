@@ -23,7 +23,7 @@ export default function App() {
 
         try {
 
-          const blob = await removeBackground("/mada.jpg");
+          const blob = await removeBackground("/mada.png");
 
           const url = URL.createObjectURL(blob);
 
@@ -114,7 +114,14 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#030014] text-white overflow-hidden relative">
+    <div className="
+      min-h-screen
+      w-full
+      overflow-x-hidden
+      bg-[#030014]
+      text-white
+      relative
+      ">
 
       {/* BACKGROUND */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#020617] via-[#12002f] to-[#020617]" />
@@ -187,7 +194,16 @@ export default function App() {
               Hello, I'm 👋
             </div>
 
-            <h1 className="text-6xl md:text-7xl font-black leading-tight mb-4">
+            <h1 className="
+              text-4xl
+              sm:text-5xl
+              md:text-6xl
+              lg:text-7xl
+              font-black
+              leading-tight
+              mb-4
+              break-words
+            ">
               Madadina
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 {" "}
@@ -195,7 +211,14 @@ export default function App() {
               </span>
             </h1>
 
-            <h2 className="text-5xl font-bold mb-6 text-white">
+            <h2 className="
+              text-3xl
+              sm:text-4xl
+              md:text-5xl
+              font-bold
+              mb-6
+              text-white
+            ">
               Web Developer
             </h2>
 
@@ -296,7 +319,9 @@ export default function App() {
               overflow-hidden
               shadow-[0_0_30px_rgba(34,211,238,0.18)]
               p-4
-              h-[600px]
+              h-[420px]
+              sm:h-[500px]
+              md:h-[600px]
               flex
               items-end
               justify-center
@@ -315,13 +340,14 @@ export default function App() {
 
               {/* IMAGE */}
               <img
-                src={processedImage || "/mada.png"}
+                src={processedImage || `${import.meta.env.BASE_URL}mada.png`}
                 alt="profile"
                 className="
                   relative
                   z-10
                   w-full
-                  h-[500px]
+                  h-[320px]
+                  sm:h-[420px]
                   md:h-[540px]
                   object-contain
                   object-bottom
@@ -335,7 +361,16 @@ export default function App() {
               <div className="absolute inset-0 bg-white/5 backdrop-blur-[2px] rounded-[32px]" />
 
               {/* FLOATING EXPERIENCE */}
-              <div className="absolute top-6 right-4 backdrop-blur-2xl bg-purple-500/20 border border-white/10 rounded-3xl px-6 py-5 shadow-xl z-20">
+              <div className="
+                absolute
+                top-4
+                right-2
+                sm:top-6
+                sm:right-4
+                scale-75
+                sm:scale-100
+                origin-top-right
+                backdrop-blur-2xl bg-purple-500/20 border border-white/10 rounded-3xl px-6 py-5 shadow-xl z-20">
 
                 <h3 className="text-3xl font-black">2+</h3>
 
@@ -346,7 +381,16 @@ export default function App() {
               </div>
 
               {/* FLOATING PROJECTS */}
-              <div className="absolute bottom-6 right-4 backdrop-blur-2xl bg-cyan-500/20 border border-white/10 rounded-3xl px-6 py-5 shadow-xl z-20">
+              <div className="
+                absolute
+                bottom-4
+                right-2
+                sm:bottom-6
+                sm:right-4
+                scale-75
+                sm:scale-100
+                origin-bottom-right 
+                backdrop-blur-2xl bg-cyan-500/20 border border-white/10 rounded-3xl px-6 py-5 shadow-xl z-20">
 
                 <h3 className="text-3xl font-black">10+</h3>
 
@@ -357,7 +401,15 @@ export default function App() {
               </div>
 
               {/* AVAILABLE BADGE */}
-              <div className="absolute left-6 top-[50%] backdrop-blur-2xl bg-cyan-500/20 border border-white/10 rounded-3xl px-6 py-4 shadow-xl z-20">
+              <div className="
+                absolute
+                left-2
+                top-[55%]
+                sm:left-6
+                scale-75
+                sm:scale-100
+                origin-left
+                backdrop-blur-2xl bg-cyan-500/20 border border-white/10 rounded-3xl px-6 py-4 shadow-xl z-20">
 
                 <h3 className="font-bold">
                   Available
@@ -407,7 +459,12 @@ export default function App() {
               </div>
 
               {/* RIGHT */}
-              <div className="grid grid-cols-2 gap-6">
+              <div className="
+                grid
+                grid-cols-1
+                sm:grid-cols-2
+                gap-6
+                ">
 
                 {[
                   ["👤", "Name", "Madadina Adilah Pamuji"],
@@ -429,7 +486,12 @@ export default function App() {
                       {item[1]}
                     </p>
 
-                    <h3 className="text-xl font-bold">
+                    <h3 className="
+                      text-lg
+                      sm:text-xl
+                      font-bold
+                      break-all
+                      ">
                       {item[2]}
                     </h3>
 
@@ -451,7 +513,13 @@ export default function App() {
             My Technical Skills
           </h2>
 
-          <div className="grid md:grid-cols-6 gap-6">
+          <div className="
+          grid
+          grid-cols-2
+          sm:grid-cols-3
+          md:grid-cols-6
+          gap-6
+          ">
 
             {skills.map((skill, index) => (
 
@@ -487,7 +555,13 @@ export default function App() {
             My Recent Projects
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="
+            grid
+            grid-cols-1
+            md:grid-cols-2
+            lg:grid-cols-3
+            gap-8
+            ">
 
             {projects.map((project, index) => (
 
@@ -505,7 +579,7 @@ export default function App() {
 
                 <div className="p-8">
 
-                  <h3 className="text-3xl font-bold mb-4">
+                  <h3 className="text-3xl font-bold break-all mb-4">
                     {project.title}
                   </h3>
 
@@ -543,7 +617,14 @@ export default function App() {
 
           <div className="backdrop-blur-2xl bg-white/5 border border-white/10 rounded-[40px] p-10 shadow-2xl">
 
-            <div className="grid md:grid-cols-4 gap-6 items-center">
+            <div className="
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-4
+            gap-6
+            items-center
+            ">
 
               <div>
 
