@@ -7,7 +7,7 @@ html {
 body {
   margin: 0;
   font-family: Inter, sans-serif;
-  background: #020617;
+  background: #fdf2f8;
   overflow-x: hidden;
 }
 
@@ -20,6 +20,46 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #06b6d4, #9333ea);
+  background: linear-gradient(to bottom, #f472b6, #c084fc, #22d3ee);
   border-radius: 999px;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-reverse {
+  animation: marquee 30s linear infinite reverse;
+  display: flex;
+  width: max-content;
+}
+
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes trail {
+  0% { 
+    opacity: 1; 
+    transform: translate(-50%, -50%) scale(1) rotate(0deg); 
+  }
+  100% { 
+    opacity: 0; 
+    transform: translate(-50%, 20px) scale(0.2) rotate(45deg); 
+  }
+}
+
+.animate-trail {
+  animation: trail 0.8s ease-out forwards;
 }
