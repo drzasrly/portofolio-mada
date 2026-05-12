@@ -202,7 +202,7 @@ export default function App() {
             </h1>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-violet-800">
-              Backup Engineer
+              Backend Engineer
             </h2>
 
             <p className="text-violet-700 text-xl leading-relaxed max-w-xl mb-10 font-medium">
