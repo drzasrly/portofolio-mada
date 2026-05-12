@@ -20,7 +20,7 @@ export default function App() {
   useEffect(() => {
     async function processImage() {
       try {
-        const blob = await removeBackground("/mada.png");
+        const blob = await removeBackground("/mada.jpeg");
         const url = URL.createObjectURL(blob);
         setProcessedImage(url);
       } catch (error) {
@@ -202,7 +202,7 @@ export default function App() {
             </h1>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-violet-800">
-              Frontend Engineer
+              Backup Engineer
             </h2>
 
             <p className="text-violet-700 text-xl leading-relaxed max-w-xl mb-10 font-medium">
@@ -255,7 +255,7 @@ export default function App() {
 
               {/* IMAGE */}
               <img
-                src={processedImage || `${import.meta.env.BASE_URL}mada.png`}
+                src={processedImage || `${import.meta.env.BASE_URL}mada.jpeg`}
                 alt="profile"
                 className="relative z-10 w-full h-[360px] sm:h-[460px] md:h-[580px] object-contain object-bottom mx-auto scale-110 drop-shadow-[0_20px_30px_rgba(100,50,255,0.2)]"
               />
