@@ -16,6 +16,7 @@ import {
 
 export default function App() {
   const [processedImage, setProcessedImage] = useState(null);
+  const [showPhoto, setShowPhoto] = useState(true);
 
   useEffect(() => {
     async function processImage() {
@@ -164,8 +165,13 @@ export default function App() {
       <div className="relative z-10 px-6 md:px-16 py-8">
 
         {/* NAVBAR */}
-        <nav className="flex justify-between items-center backdrop-blur-xl bg-white/40 border border-white/60 rounded-3xl px-8 py-5 shadow-lg shadow-purple-900/5 mb-24">
-          <h1 className="text-3xl font-black tracking-wide text-violet-900">
+        <motion.nav
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex justify-between items-center backdrop-blur-xl bg-white/40 border border-white/60 rounded-3xl px-6 sm:px-8 py-4 sm:py-5 shadow-lg shadow-purple-900/5 mb-16 sm:mb-24"
+        >
+          <h1 className="text-2xl sm:text-3xl font-black tracking-wide text-violet-900">
             Portfolio<span className="text-pink-500">.</span>
           </h1>
 
@@ -177,10 +183,12 @@ export default function App() {
             <a href="#contact" className="hover:text-pink-500 transition">Contact</a>
           </div>
 
-          <button className="hidden md:block px-6 py-3 rounded-2xl bg-white/60 border border-purple-200 text-violet-800 font-bold hover:bg-white/80 transition shadow-md shadow-purple-200">
-            Download CV
-          </button>
-        </nav>
+          <a href={`${import.meta.env.BASE_URL}CV_Madadina.pdf`} download="CV_Madadina.pdf" className="hidden md:block">
+            <button className="px-6 py-3 rounded-2xl bg-white/60 border border-purple-200 text-violet-800 font-bold hover:bg-white/80 transition shadow-md shadow-purple-200">
+              Download CV
+            </button>
+          </a>
+        </motion.nav>
 
         {/* HERO */}
         <section id="home" className="grid md:grid-cols-2 gap-16 items-center mb-32">
@@ -206,7 +214,7 @@ export default function App() {
             </h2>
 
             <p className="text-violet-700 text-xl leading-relaxed max-w-xl mb-10 font-medium">
-              Specializing in building scalable, high-performance web applications with a strong focus on intuitive user experiences and clean, maintainable code.
+              Specializing in designing and building robust, scalable APIs, microservices, and high-performance system architectures to power seamless digital experiences.
             </p>
 
             <div className="flex gap-5 flex-wrap mb-12">
@@ -253,12 +261,46 @@ export default function App() {
                 <div className="absolute bottom-10 right-10 w-[200px] h-[200px] bg-cyan-300/50 rounded-full blur-[80px]" />
               </div>
 
-              {/* IMAGE */}
-              <img
-                src={processedImage || `${import.meta.env.BASE_URL}mada.jpeg`}
-                alt="profile"
-                className="relative z-10 w-full h-[360px] sm:h-[460px] md:h-[580px] object-contain object-bottom mx-auto scale-110 drop-shadow-[0_20px_30px_rgba(100,50,255,0.2)]"
-              />
+              {/* IMAGE OR ANIMATION */}
+              {showPhoto ? (
+                <img
+                  src={processedImage || `${import.meta.env.BASE_URL}mada.jpeg`}
+                  alt="profile"
+                  className="relative z-10 w-full h-[360px] sm:h-[460px] md:h-[580px] object-contain object-bottom mx-auto scale-110 drop-shadow-[0_20px_30px_rgba(100,50,255,0.2)]"
+                />
+              ) : (
+                <div className="relative z-10 w-full h-[360px] sm:h-[460px] md:h-[580px] flex items-center justify-center">
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 180, 360],
+                      borderRadius: ["20%", "50%", "20%"]
+                    }}
+                    transition={{
+                      duration: 4,
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                    }}
+                    className="w-48 h-48 sm:w-64 sm:h-64 bg-gradient-to-tr from-pink-400 via-purple-500 to-cyan-400 opacity-80 mix-blend-multiply blur-[2px]"
+                  />
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      rotate: [360, 180, 0],
+                      borderRadius: ["50%", "20%", "50%"]
+                    }}
+                    transition={{
+                      duration: 5,
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                    }}
+                    className="absolute w-48 h-48 sm:w-64 sm:h-64 bg-gradient-to-bl from-cyan-400 via-indigo-500 to-purple-400 opacity-70 mix-blend-multiply blur-[2px]"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <span className="text-white font-black text-2xl sm:text-4xl drop-shadow-lg mix-blend-overlay">{"</>"}</span>
+                  </div>
+                </div>
+              )}
 
               {/* FLOATING BUBBLES / DROPLETS */}
               <div className="absolute top-[-20px] left-[10%] w-12 h-12 rounded-full bg-white/40 backdrop-blur-md border border-white/80 shadow-lg z-20" />
@@ -287,12 +329,28 @@ export default function App() {
                 <p className="text-xs text-violet-600 font-semibold">for work</p>
               </div>
             </div>
+
+            {/* TOGGLE BUTTON */}
+            <div className="flex justify-center mt-8 w-full relative z-30">
+              <button
+                onClick={() => setShowPhoto(!showPhoto)}
+                className="bg-white/60 hover:bg-white/80 backdrop-blur-xl border border-purple-200 text-violet-800 px-6 py-3 rounded-full text-sm font-bold shadow-lg shadow-purple-200/50 hover:-translate-y-1 transition-all duration-300"
+              >
+                {showPhoto ? "🪄 Hide Photo & Show Magic" : "📸 Show Profile Photo"}
+              </button>
+            </div>
           </motion.div>
         </section>
 
         {/* ABOUT */}
         <section id="about" className="mb-32">
-          <div className="backdrop-blur-xl bg-white/40 border border-white/60 rounded-[40px] p-10 shadow-[0_8px_30px_rgba(100,50,255,0.1)] relative overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="backdrop-blur-xl bg-white/40 border border-white/60 rounded-[40px] p-6 sm:p-10 shadow-[0_8px_30px_rgba(100,50,255,0.1)] relative overflow-hidden"
+          >
 
             {/* INNER GLOWS */}
             <div className="absolute top-[-50%] left-[-10%] w-[300px] h-[300px] bg-pink-300/30 rounded-full blur-[80px] z-0" />
@@ -305,12 +363,12 @@ export default function App() {
                   About Me
                 </div>
 
-                <h2 className="text-5xl font-black mb-6 text-violet-900">
+                <h2 className="text-4xl md:text-5xl font-black mb-6 text-violet-900">
                   Professional Summary
                 </h2>
 
                 <p className="text-violet-700 text-lg leading-relaxed mb-8 font-medium">
-                  I am a dedicated Frontend Engineer with a proven track record of developing responsive, user-centric web applications. I combine my technical expertise in modern JavaScript frameworks with a keen eye for design to deliver robust and elegant digital solutions that drive business value.
+                  I am a dedicated Backend Engineer with a strong passion for designing scalable architectures, managing databases, and building robust APIs. I combine my expertise in server-side technologies with a deep understanding of system performance to deliver secure and efficient solutions that drive business growth.
                 </p>
 
                 <a href="#contact">
@@ -348,21 +406,33 @@ export default function App() {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* SKILLS */}
         <section id="skills" className="mb-32">
-          <div className="flex flex-col items-center mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center mb-14"
+          >
             <div className="inline-block px-5 py-2 rounded-full border-2 border-purple-300 text-purple-600 font-bold uppercase tracking-[2px] text-sm mb-6 bg-white/50 backdrop-blur-md">
               Skills
             </div>
-            <h2 className="text-5xl font-black text-center text-violet-900">
+            <h2 className="text-4xl md:text-5xl font-black text-center text-violet-900">
               My Technical Skills
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden w-full flex flex-col gap-8 py-10 -mx-6 md:-mx-16 px-6 md:px-16" style={{ width: '100vw', left: '50%', transform: 'translateX(-50%)' }}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+            className="relative overflow-hidden w-full flex flex-col gap-8 py-10 -mx-6 md:-mx-16 px-6 md:px-16" style={{ width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          >
             {/* BUBBLE BACKGROUND FOR SKILLS */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[150%] bg-white/20 rounded-full blur-[100px] -z-10" />
 
@@ -408,24 +478,34 @@ export default function App() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
         </section>
 
         {/* PROJECTS */}
         <section id="projects" className="mb-32">
-          <div className="flex flex-col items-center mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center mb-14"
+          >
             <div className="inline-block px-5 py-2 rounded-full border-2 border-purple-300 text-purple-600 font-bold uppercase tracking-[2px] text-sm mb-6 bg-white/50 backdrop-blur-md">
               Projects
             </div>
-            <h2 className="text-5xl font-black text-center text-violet-900">
+            <h2 className="text-4xl md:text-5xl font-black text-center text-violet-900">
               My Recent Projects
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.length > 0 ? (
               projects.map((project, index) => (
                 <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -10 }}
                   key={index}
                   className="backdrop-blur-xl bg-white/40 border border-white/60 rounded-[40px] overflow-hidden shadow-[0_8px_30px_rgba(100,50,255,0.1)] hover:shadow-[0_15px_40px_rgba(236,72,153,0.2)] transition duration-300 flex flex-col"
@@ -470,7 +550,13 @@ export default function App() {
 
         {/* CONTACT */}
         <section id="contact">
-          <div className="backdrop-blur-xl bg-white/40 border border-white/60 rounded-[40px] p-10 shadow-[0_8px_30px_rgba(100,50,255,0.1)] relative overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="backdrop-blur-xl bg-white/40 border border-white/60 rounded-[40px] p-6 sm:p-10 shadow-[0_8px_30px_rgba(100,50,255,0.1)] relative overflow-hidden"
+          >
 
             {/* INNER GLOWS */}
             <div className="absolute top-[-50%] right-[-10%] w-[400px] h-[400px] bg-cyan-300/30 rounded-full blur-[80px] z-0" />
@@ -573,7 +659,7 @@ export default function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* FOOTER */}
